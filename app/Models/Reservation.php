@@ -10,20 +10,12 @@ class Reservation extends Model
     /** @use HasFactory<\Database\Factories\ReservationFactory> */
     use HasFactory;
 
-<<<<<<< HEAD
     protected $fillable = 
     [
         'book_id',
         'user_id',
         'start',
         'message'
-=======
-    protected $fillable = [
-        'book_id',
-        'user_id',
-        'start',
-        "message"
->>>>>>> 4fb75fe062fc5398ee306474d394d4e905998750
     ];
 
     protected function setKeysForSaveQuery($query)
@@ -32,13 +24,13 @@ class Reservation extends Model
             ->where('book_id', '=', $this->getAttribute('book_id'))
             ->where('user_id', '=', $this->getAttribute('user_id'))
             ->where('start', '=', $this->getAttribute('start'));
-<<<<<<< HEAD
 
         return $query;
     }
 
-=======
-        return $query;
+    public function toBooks()
+    {
+        return $this->belongsTo(Book::class, "book_id", "id");
     }
->>>>>>> 4fb75fe062fc5398ee306474d394d4e905998750
+
 }

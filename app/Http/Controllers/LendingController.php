@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLendingRequest;
 use App\Http\Requests\UpdateLendingRequest;
 use App\Models\Lending;
+use Illuminate\Support\Facades\Auth;
 
 class LendingController extends Controller
 {
@@ -24,16 +25,11 @@ class LendingController extends Controller
         $lending = new Lending();
         $lending->fill($request->all());
         $lending->save();
-<<<<<<< HEAD
-=======
-        return response()->json($lending, 201);
->>>>>>> 4fb75fe062fc5398ee306474d394d4e905998750
     }
 
     /**
      * Display the specified resource.
      */
-<<<<<<< HEAD
     public function show($user_id, $copy_id, $start)
     {
         $lending = Lending::where('user_id', $user_id)
@@ -43,18 +39,6 @@ class LendingController extends Controller
         return $lending[0];
     }
 
-=======
-    public function show ($user_id, $copy_id, $start)
-    {
-        $lending = Lending::where('user_id', $user_id)
-        ->where('copy_id', $copy_id)
-        ->where('start', $start)
-        ->get();
-        return $lending[0];
-    }
-
-
->>>>>>> 4fb75fe062fc5398ee306474d394d4e905998750
     /**
      * Update the specified resource in storage.
      */
@@ -73,10 +57,14 @@ class LendingController extends Controller
     {
         $lending = $this->show($user_id, $copy_id, $start);
         $lending->delete();
-<<<<<<< HEAD
         return response()->json(null, 200);
-=======
-        return response()->json(NULL, 200);
->>>>>>> 4fb75fe062fc5398ee306474d394d4e905998750
     }
+
+    public function myLendingsWithCopies()
+    {
+        $user = Auth::user();
+        return Lending::with("toCopies")
+        ->where('user_id', $user->id)
+        ->get();
+    }    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Console\View\Components\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,4 +14,15 @@ class Book extends Model
         'author',
         'title'
     ];
+
+    public function toCopies()
+    {
+        return $this->hasMany(Copy::class);
+    }
+
+    public function toReservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    
 }

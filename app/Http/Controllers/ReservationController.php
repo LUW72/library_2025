@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Models\Book;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -47,4 +49,13 @@ class ReservationController extends Controller
     {
         //
     }
+
+    public function myBookReservations()
+    {
+        $user = Auth::user();
+
+        return Reservation::with("toBooks")
+        ->where('user_id', $user->id)
+        ->get();
+    }      
 }
