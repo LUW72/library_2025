@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer',
             'user' => $user,
-            'status' => 'Login successful',
+            'status' => 'Login successful', 
         ]);
     }
 
