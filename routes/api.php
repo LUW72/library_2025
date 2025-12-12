@@ -39,7 +39,8 @@ Route::middleware(['auth:sanctum'])->group(function ()
 //admin    
 Route::middleware(['auth:sanctum', Admin::class])->group(function () 
 {
-    Route::get('/reservationsForBooks',[BookController::class, 'reservationsForBooks']);    
+    Route::get('/books-with-reservations',[BookController::class, 'booksWithReservations']);    
+
     Route::get('/books-with-copies',[BookController::class, 'booksWithCopies']);    
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/book-reserved/{id}',[BookController::class, 'bookReservedCount']);    

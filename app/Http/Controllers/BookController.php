@@ -16,14 +16,14 @@ class BookController extends Controller
         return Book::with("toCopies")->get();
     }
 
-    public function reservationsForBooks()
+    public function booksWithReservations()
     {
         return Book::with("toReservations")->get();
-    }    
+    }
 
     public function specialAuthors($speciality)
     {
-        return Book::where('author', 'LIKE', $speciality."%")->get();
+        return Book::where('author', 'LIKE', $speciality . "%")->get();
     }
 
     public function bookReservedCount($id)
@@ -34,7 +34,14 @@ class BookController extends Controller
             ->count();
 
         return $pieces;
-            
-            
+    }
+
+    public function reservationBooksByYear($year)
+    {
+        $pieces = DB:+:table("books as b")
+            ->join("reservations as r", "b.id", "r.book_id")
+            ->where("r.book_id", $id)        
+
+        return
     }
 }

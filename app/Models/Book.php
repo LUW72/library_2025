@@ -22,7 +22,7 @@ class Book extends Model
 
     public function toReservations()
     {
-        return $this->hasMany(Reservation::class);
+        return $this->hasMany(Reservation::class, "book_id", "id");
     }
     
 }
